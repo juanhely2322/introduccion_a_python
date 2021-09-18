@@ -16,7 +16,7 @@ base_datos=mysql.connector.connect(
 def crearUsuario(nombres,correo,clave):
     cursor=base_datos.cursor()
     cursor.execute('''insert into usuarios(nombre,email,contrasena) 
-    values(%s,%s,%s)''',(nombres,correo,clave))
+    values(%s,%s,%s)''',(nombres,correo,clave,))
     base_datos.commit()
     cursor.close()
 
@@ -48,13 +48,13 @@ while  opc!=5:
                 nombre=input("ingrese nuevo nombre: ")
                 email=input("ingrese nuevo email: ")
                 contrasena=input("ingrese nueva contraseña: ")
-                cursor.execute(" update  usuarios set nombre= %s,email=%s,contrasena=%s where id=%s ",(nombre,email,contrasena,id))
+                cursor.execute(" update  usuarios set nombre= %s,email=%s,contrasena=%s where id=%s ",(nombre,email,contrasena,id,))
                 cursor.close()
                 base_datos.commit()
                 print("¡ACTUALIZACION EXITOSA!")
             elif opc==4:
                  id2=input("ingrese id para eliminar usuario:  ")
-                 cursor.execute("delete from usuarios where id=%s",(id2))
+                 cursor.execute("delete from usuarios where id=%s",(id2,))
                  base_datos.commit()
                  cursor.close()
                 

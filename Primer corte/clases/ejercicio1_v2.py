@@ -106,7 +106,7 @@ letrasUnicas=[]
 for letra in texto:
     cont=0
     for letraUnica in letrasUnicas:
-        if letraunica == letra:
+        if letraUnica == letra:
             cont+=1
 
         if cont==0:
