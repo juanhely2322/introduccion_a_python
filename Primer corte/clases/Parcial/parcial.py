@@ -2,7 +2,7 @@
 
 
 import mysql.connector
-
+import hashlib
 
 usuario=mysql.connector.connect(
     host='localhost',
@@ -13,12 +13,12 @@ usuario=mysql.connector.connect(
 )
 
 
-"""def crearUsuario(nombres,correo,clave):
+def crearUsuario(nombres,correo,clave):
     cursor=usuario.cursor()
     cursor.execute('''insert into usuarios(nombre,email,contrasena) 
     values(%s,%s,%s)''',(nombres,correo,clave,))
     usuario.commit()
-    cursor.close()"""
+    cursor.close()
     
 
 opc=1
@@ -35,30 +35,19 @@ while  opc!=3 and opc<=3:
                 #cursor.execute('''INSERT into usuarios(nombre) values (s%)''',(nombre))
                 email=input ("ingresas su email:")
                 #cursor.execute('''INSERT into usuarios(email) values (s%)''',(email))
-                contracena=input("crea una contraceña: ")
-                if len(contracena)>=8:
-                    mayusculas=[]
-                    cont=0
-                    aux=0
-                    for contra in contracena:
-                        mayusculas.append(contra)
-                while aux<len(contracena):
-                
-                 if contracena[aux]==(mayusculas[aux]).upper:
-                     
-                  print(mayusculas[aux])
-                  
-                  aux=len(contracena);
-                  
-                print(mayusculas[aux])              
-                if len(contracena)<8:
-                    print("Contraseña demaciado corta")
-                    
+                contracena= ( input("crea una contraceña: "))
+                crearUsuario(nombre,email,contracena)
                     
                 
             if opc==2:
                 correo=input("ingresa tu correo: ")
-                contraceña=input("ingrese su contraceña: ")
-                  
+                clave= input("ingrese su contraseña: ")
+                cursor.execute('''SELECT contrasena from usuarios where contrasena=%s''',(clave))
+                contraceña=cursor.fetchall()
+                usuario.commit()
+                cursor.close()
+               
+                if contraceña ==clave:
+                    print("clave correcta")  
                 
         
